@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers\user;
+
+use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+
+class tamuController extends Controller
+{
+    public function simpanTamu(Request $request){
+        $nama = $request->nama;
+        $telepon = $request->telepon;
+        $email = $request->email;
+        $alamat = $request->alamat;
+
+
+        $data = new User();
+        $data->nama = $nama;
+        $data->telp = $telepon;
+        $data->email = $email;
+        $data->alamat = $alamat;
+        $data->password = Hash::make('rahasia');
+        $data->save();
+
+        return redirect('/')->with('status', 'Data Berhasil Disimpan');
+
+    }
+}
